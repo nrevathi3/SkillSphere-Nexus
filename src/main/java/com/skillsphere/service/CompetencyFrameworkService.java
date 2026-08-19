@@ -16,57 +16,62 @@ public class CompetencyFrameworkService {
     @Autowired
     private CompetencyFrameworkRepository competencyFrameworkRepository;
 
-    public CompetencyFrameworkDTO addCompetencyFramework(CompetencyFrameworkDTO competencyFrameworkDTO) {
+    public CompetencyFrameworkDTO addCompetencyFramework(
+            CompetencyFrameworkDTO competencyFrameworkDTO) {
 
         CompetencyFramework competencyFramework = CompetencyFramework.builder()
                 .competencyName(competencyFrameworkDTO.getCompetencyName())
                 .description(competencyFrameworkDTO.getDescription())
                 .proficiencyLevel(competencyFrameworkDTO.getProficiencyLevel())
                 .category(competencyFrameworkDTO.getCategory())
+                .roleTitle(competencyFrameworkDTO.getRoleTitle())
+                .skillId(competencyFrameworkDTO.getSkillId())
+                .requiredProficiency(competencyFrameworkDTO.getRequiredProficiency())
                 .build();
 
-        CompetencyFramework savedCompetency = competencyFrameworkRepository.save(competencyFramework);
+        CompetencyFramework savedCompetency =
+                competencyFrameworkRepository.save(competencyFramework);
 
-        return CompetencyFrameworkDTO.builder()
-                .competencyFrameworkId(savedCompetency.getCompetencyFrameworkId())
-                .competencyName(savedCompetency.getCompetencyName())
-                .description(savedCompetency.getDescription())
-                .proficiencyLevel(savedCompetency.getProficiencyLevel())
-                .category(savedCompetency.getCategory())
-                .build();
+        return toDTO(savedCompetency);
     }
-
 
     public List<CompetencyFrameworkDTO> getAllCompetencyFrameworks() {
 
         return competencyFrameworkRepository.findAll()
                 .stream()
-                .map(competency -> CompetencyFrameworkDTO.builder()
-                        .competencyFrameworkId(competency.getCompetencyFrameworkId())
-                        .competencyName(competency.getCompetencyName())
-                        .description(competency.getDescription())
-                        .proficiencyLevel(competency.getProficiencyLevel())
-                        .category(competency.getCategory())
-                        .build())
+                .map(this::toDTO)
                 .collect(Collectors.toList());
     }
 
-
     public CompetencyFrameworkDTO getCompetencyFrameworkById(UUID id) {
 
-        CompetencyFramework competency = competencyFrameworkRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Competency Framework not found"));
+        CompetencyFramework competency =
+                competencyFrameworkRepository.findById(id)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Competency Framework not found"));
 
-        return CompetencyFrameworkDTO.builder()
-                .competencyFrameworkId(competency.getCompetencyFrameworkId())
-                .competencyName(competency.getCompetencyName())
-                .description(competency.getDescription())
-                .proficiencyLevel(competency.getProficiencyLevel())
-                .category(competency.getCategory())
-                .build();
+        return toDTO(competency);
     }
 
     public void deleteCompetencyFramework(UUID id) {
         competencyFrameworkRepository.deleteById(id);
+    }
+
+    private CompetencyFrameworkDTO toDTO(
+            CompetencyFramework competency) {
+
+        return CompetencyFrameworkDTO.builder()
+                .competencyFrameworkId(
+                        competency.getCompetencyFrameworkId())
+                .competencyName(competency.getCompetencyName())
+                .description(competency.getDescription())
+                .proficiencyLevel(competency.getProficiencyLevel())
+                .category(competency.getCategory())
+                .roleTitle(competency.getRoleTitle())
+                .skillId(competency.getSkillId())
+                .requiredProficiency(
+                        competency.getRequiredProficiency())
+                .build();
     }
 }

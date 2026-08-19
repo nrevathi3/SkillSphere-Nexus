@@ -28,4 +28,13 @@ public class CompetencyFramework {
 
     @Column(nullable = false)
     private String category;
+
+    @Column(nullable = false)
+    private String roleTitle;
+
+    @Column(nullable = false)
+    private UUID skillId;
+
+    @Column(nullable = false)
+    private Integer requiredProficiency;
 }

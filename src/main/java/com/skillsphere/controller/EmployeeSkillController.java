@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/employee-skills")
+@RequestMapping("/api/employee-skills")
 public class EmployeeSkillController {
 
     @Autowired

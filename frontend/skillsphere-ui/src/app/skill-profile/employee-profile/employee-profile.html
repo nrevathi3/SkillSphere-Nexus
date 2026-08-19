@@ -1,0 +1,420 @@
+<div class="profile-container">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="header-icon">👤</div>
+
+    <div>
+      <h1>Employee Skill Profile</h1>
+      <p>Employee skills, certifications and assessment overview</p>
+    </div>
+  </div>
+
+
+  @if (employeeProfile) {
+
+  <!-- =========================
+       EMPLOYEE PROFILE CARD
+  ========================== -->
+
+  <section class="employee-card">
+
+    <div class="employee-top">
+
+      <div class="avatar">
+        {{ employeeProfile.employee.firstName.charAt(0) }}
+        {{ employeeProfile.employee.lastName.charAt(0) }}
+      </div>
+
+      <div class="employee-name">
+
+        <h2>
+          {{ employeeProfile.employee.firstName }}
+          {{ employeeProfile.employee.lastName }}
+        </h2>
+
+        <span class="status-badge">
+            <span class="status-dot"></span>
+            {{ employeeProfile.employee.status }}
+          </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="employee-details">
+
+      <!-- Employee Code -->
+      <div class="detail-item">
+
+        <div class="detail-icon">🪪</div>
+
+        <div>
+          <span class="detail-label">Employee Code</span>
+
+          <strong>
+            {{ employeeProfile.employee.employeeCode }}
+          </strong>
+        </div>
+
+      </div>
+
+
+      <!-- Department -->
+      <div class="detail-item">
+
+        <div class="detail-icon">🏢</div>
+
+        <div>
+          <span class="detail-label">Department</span>
+
+          <strong>
+            {{ employeeProfile.employee.department }}
+          </strong>
+        </div>
+
+      </div>
+
+
+      <!-- Designation -->
+      <div class="detail-item">
+
+        <div class="detail-icon">💼</div>
+
+        <div>
+          <span class="detail-label">Designation</span>
+
+          <strong>
+            {{ employeeProfile.employee.designation }}
+          </strong>
+        </div>
+
+      </div>
+
+
+      <!-- Experience -->
+      <div class="detail-item">
+
+        <div class="detail-icon">◷</div>
+
+        <div>
+          <span class="detail-label">Experience</span>
+
+          <strong>
+            {{ employeeProfile.employee.experience }} years
+          </strong>
+        </div>
+
+      </div>
+
+
+      <!-- Email -->
+      <div class="detail-item">
+
+        <div class="detail-icon">✉</div>
+
+        <div>
+          <span class="detail-label">Email</span>
+
+          <strong>
+            {{ employeeProfile.employee.email }}
+          </strong>
+        </div>
+
+      </div>
+
+
+      <!-- Status -->
+      <div class="detail-item">
+
+        <div class="detail-icon">✓</div>
+
+        <div>
+          <span class="detail-label">Status</span>
+
+          <strong class="active-text">
+            {{ employeeProfile.employee.status }}
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       SKILLS
+  ========================== -->
+
+  <section class="content-section">
+
+    <div class="section-title">
+      <span class="section-icon">📊</span>
+      <h2>Skills</h2>
+    </div>
+
+    @if (employeeProfile.skills?.length) {
+
+    <div class="skills-grid">
+
+      @for (
+      item of employeeProfile.skills;
+      track item.employeeSkillId
+      ) {
+
+      <div class="skill-card">
+
+        <div class="skill-header">
+
+          <div class="skill-icon">
+            {{ $index === 0 ? '‹/›' :
+            $index === 1 ? '●' :
+            $index === 2 ? '☁' : '⚙' }}
+          </div>
+
+          <div class="skill-title">
+
+            <span>Skill ID</span>
+
+            <strong>
+              {{ item.skillId }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="skill-level-row">
+
+          <span>Level</span>
+
+          <strong>
+            {{ item.skillLevel }}/5
+          </strong>
+
+        </div>
+
+
+        <!-- Progress bar -->
+        <div class="progress-bar">
+
+          <div
+            class="progress-fill"
+            [style.width.%]="item.skillLevel * 20">
+          </div>
+
+        </div>
+
+
+        <div class="skill-footer">
+
+          <span>📅 Experience</span>
+
+          <strong>
+            {{ item.yearsOfExperience }}
+            {{ item.yearsOfExperience === 1 ? 'year' : 'years' }}
+          </strong>
+
+        </div>
+
+
+        @if (item.verified) {
+
+        <div class="verified-badge">
+          ✓ Verified
+        </div>
+
+        }
+
+      </div>
+
+      }
+
+    </div>
+
+    } @else {
+
+    <div class="empty-card">
+      No skills found.
+    </div>
+
+    }
+
+  </section>
+
+
+  <!-- =========================
+       CERTIFICATIONS
+  ========================== -->
+
+  <section class="content-section">
+
+    <div class="section-title certification-title">
+      <span class="section-icon">🏆</span>
+      <h2>Certifications</h2>
+    </div>
+
+    @if (employeeProfile.certifications?.length) {
+
+    <div class="certifications-grid">
+
+      @for (
+      cert of employeeProfile.certifications;
+      track cert.certificationId
+      ) {
+
+      <div class="certification-card">
+
+        <div class="certificate-icon">
+          🏆
+        </div>
+
+        <div class="certificate-content">
+
+          <h3>
+            {{ cert.certificationName }}
+          </h3>
+
+          <p>
+            <strong>Organization:</strong>
+            {{ cert.organization }}
+          </p>
+
+          <div class="certificate-dates">
+
+                  <span>
+                    <b>Issued:</b>
+                    {{ cert.issueDate }}
+                  </span>
+
+            <span>
+                    <b>Expires:</b>
+                    {{ cert.expiryDate }}
+                  </span>
+
+          </div>
+
+          <span class="certificate-status">
+                  {{ cert.status }}
+                </span>
+
+        </div>
+
+      </div>
+
+      }
+
+    </div>
+
+    } @else {
+
+    <div class="empty-card">
+      No certifications found.
+    </div>
+
+    }
+
+  </section>
+
+
+  <!-- =========================
+       ASSESSMENTS
+  ========================== -->
+
+  <section class="content-section">
+
+    <div class="section-title assessment-title">
+      <span class="section-icon">📝</span>
+      <h2>Assessments</h2>
+    </div>
+
+    @if (employeeProfile.assessments?.length) {
+
+    <div class="assessments-grid">
+
+      @for (
+      assessment of employeeProfile.assessments;
+      track assessment.assessmentId
+      ) {
+
+      <div class="assessment-card">
+
+        <div class="assessment-top">
+
+          <div>
+            <h3>
+              {{ assessment.assessmentName }}
+            </h3>
+
+            <span>
+                    {{ assessment.assessmentDate }}
+                  </span>
+          </div>
+
+          <div class="score-circle">
+            {{ assessment.score }}%
+          </div>
+
+        </div>
+
+
+        <div class="assessment-result">
+
+                <span
+                  class="result-badge"
+                  [class.failed]="!assessment.passed">
+
+                  {{ assessment.result }}
+
+                </span>
+
+
+          @if (assessment.passed) {
+
+          <span class="verified-badge">
+                    ✓ Passed
+                  </span>
+
+          }
+
+
+          @if (assessment.verified) {
+
+          <span class="verified-badge">
+                    ✓ Verified
+                  </span>
+
+          }
+
+        </div>
+
+      </div>
+
+      }
+
+    </div>
+
+    } @else {
+
+    <div class="empty-card">
+      No assessments found.
+    </div>
+
+    }
+
+  </section>
+
+  } @else {
+
+  <div class="loading-card">
+    <div class="loading-spinner"></div>
+    <p>Loading employee profile...</p>
+  </div>
+
+  }
+
+</div>

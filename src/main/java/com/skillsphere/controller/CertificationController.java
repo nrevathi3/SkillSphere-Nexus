@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/certifications")
+@RequestMapping("/api/certifications")
 public class CertificationController {
 
     @Autowired

@@ -21,4 +21,7 @@ public class AssessmentDTO {
     private Integer score;
     private LocalDate assessmentDate;
     private String result;
+
+    private Boolean passed;
+    private Boolean verified;
 }

@@ -12,7 +12,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "assessment")
 public class Assessment {
-
     @Id
     @GeneratedValue
     private UUID assessmentId;
@@ -34,4 +33,10 @@ public class Assessment {
 
     @Column(nullable = false)
     private String result;
+
+    @Column(nullable = false)
+    private Boolean passed = false;
+
+    @Column(nullable = false)
+    private Boolean verified = false;
 }

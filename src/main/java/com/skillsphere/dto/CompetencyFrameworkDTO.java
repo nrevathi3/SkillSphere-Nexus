@@ -18,4 +18,8 @@ public class CompetencyFrameworkDTO {
     private String description;
     private String proficiencyLevel;
     private String category;
+
+    private String roleTitle;
+    private UUID skillId;
+    private Integer requiredProficiency;
 }

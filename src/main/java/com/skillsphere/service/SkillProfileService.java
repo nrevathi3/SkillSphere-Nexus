@@ -63,6 +63,8 @@ public class SkillProfileService {
                                 .score(assessment.getScore())
                                 .assessmentDate(assessment.getAssessmentDate())
                                 .result(assessment.getResult())
+                                .passed(assessment.getPassed())
+                                .verified(assessment.getVerified())
                                 .build())
                         .collect(Collectors.toList());
 

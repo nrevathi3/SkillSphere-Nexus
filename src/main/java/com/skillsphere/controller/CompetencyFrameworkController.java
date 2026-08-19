@@ -9,14 +9,15 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/competency-frameworks")
+@RequestMapping("/api/competency")
 public class CompetencyFrameworkController {
 
     @Autowired
     private CompetencyFrameworkService competencyFrameworkService;
 
     @PostMapping
-    public CompetencyFrameworkDTO addCompetencyFramework(@RequestBody CompetencyFrameworkDTO competencyFrameworkDTO) {
+    public CompetencyFrameworkDTO addCompetencyFramework(
+            @RequestBody CompetencyFrameworkDTO competencyFrameworkDTO) {
         return competencyFrameworkService.addCompetencyFramework(competencyFrameworkDTO);
     }
 
@@ -26,7 +27,8 @@ public class CompetencyFrameworkController {
     }
 
     @GetMapping("/{id}")
-    public CompetencyFrameworkDTO getCompetencyFrameworkById(@PathVariable UUID id) {
+    public CompetencyFrameworkDTO getCompetencyFrameworkById(
+            @PathVariable UUID id) {
         return competencyFrameworkService.getCompetencyFrameworkById(id);
     }
 
