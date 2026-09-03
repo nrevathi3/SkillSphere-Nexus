@@ -1,0 +1,279 @@
+<div class="learning-path-container">
+
+  <!-- =====================================================
+       PAGE HEADER
+  ====================================================== -->
+
+  <section class="page-header">
+
+    <div class="header-icon">
+      🎯
+    </div>
+
+    <div>
+      <h1>Learning Paths</h1>
+
+      <p>
+        Follow a structured learning journey and build your skills step by step.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       LOADING
+  ====================================================== -->
+
+  @if (loading) {
+
+  <div class="loading-card">
+
+    <div class="loading-spinner"></div>
+
+    <p>Loading learning paths...</p>
+
+  </div>
+
+  }
+
+
+  <!-- =====================================================
+       NO LEARNING PATHS
+  ====================================================== -->
+
+  @else if (learningPaths.length === 0) {
+
+  <div class="empty-card">
+
+    <div class="empty-icon">
+      📚
+    </div>
+
+    <h3>No Learning Paths Available</h3>
+
+    <p>
+      Learning paths will appear here when they are available.
+    </p>
+
+  </div>
+
+  }
+
+
+  <!-- =====================================================
+       LEARNING PATH LIST
+  ====================================================== -->
+
+  @else {
+
+  <div class="learning-path-list">
+
+    @for (
+    path of learningPaths;
+    track path.pathId
+    ) {
+
+    <section class="learning-path-card">
+
+      <!-- =================================================
+           PATH HEADER
+      ================================================== -->
+
+      <div class="path-header">
+
+        <div class="path-icon">
+          🎯
+        </div>
+
+        <div class="path-info">
+
+          <div class="path-title-row">
+
+            <h2>
+              {{ path.name }}
+            </h2>
+
+            @if (path.active) {
+
+            <span class="active-badge">
+                    Active
+                  </span>
+
+            }
+
+          </div>
+
+          <p class="career-track">
+            {{ path.careerTrack }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           PATH DESCRIPTION
+      ================================================== -->
+
+      @if (path.description) {
+
+      <p class="path-description">
+        {{ path.description }}
+      </p>
+
+      }
+
+
+      <!-- =================================================
+           PATH PROGRESS
+      ================================================== -->
+
+      <div class="path-progress">
+
+        <div class="progress-header">
+
+              <span>
+                Learning Progress
+              </span>
+
+          <strong>
+            {{ path.progress || 0 }}%
+          </strong>
+
+        </div>
+
+        <div class="progress-track">
+
+          <div
+            class="progress-fill"
+            [style.width.%]="path.progress || 0">
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           COURSES
+      ================================================== -->
+
+      <div class="courses-section">
+
+        <div class="courses-header">
+
+          <div>
+
+            <h3>
+              Courses in this Path
+            </h3>
+
+            <p>
+              {{ getCourseCount(path.pathId) }}
+              course{{ getCourseCount(path.pathId) === 1 ? '' : 's' }}
+            </p>
+
+          </div>
+
+        </div>
+
+
+        @if (getCoursesForPath(path.pathId).length > 0) {
+
+        <div class="path-course-list">
+
+          @for (
+          pathCourse of getCoursesForPath(path.pathId);
+          track pathCourse.id
+          ) {
+
+          <div class="path-course-card">
+
+            <!-- COURSE NUMBER -->
+
+            <div class="course-number">
+              {{ pathCourse.sequenceOrder }}
+            </div>
+
+
+            <!-- COURSE INFORMATION -->
+
+            <div class="path-course-info">
+
+              <h4>
+                {{ pathCourse.course.title }}
+              </h4>
+
+              <p>
+                {{ pathCourse.course.description }}
+              </p>
+
+              <div class="course-meta">
+
+                        <span>
+                          ⏱ {{ pathCourse.course.duration }} Hours
+                        </span>
+
+                <span>
+                          ⭐ {{ pathCourse.course.rating }}
+                        </span>
+
+                <span>
+                          {{ pathCourse.course.type }}
+                        </span>
+
+              </div>
+
+            </div>
+
+
+            <!-- COURSE ACTION -->
+
+            <a
+              class="view-course-button"
+              [routerLink]="[
+                        '/learning/course',
+                        pathCourse.course.courseId
+                      ]">
+
+              View Course →
+
+            </a>
+
+          </div>
+
+          }
+
+        </div>
+
+        }
+
+        @else {
+
+        <div class="no-courses">
+
+                <span>
+                  📚
+                </span>
+
+          <p>
+            No courses have been added to this path yet.
+          </p>
+
+        </div>
+
+        }
+
+      </div>
+
+    </section>
+
+    }
+
+  </div>
+
+  }
+
+</div>

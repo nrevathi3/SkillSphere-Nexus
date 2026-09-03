@@ -1,0 +1,114 @@
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.page-header p {
+  margin: 6px 0 0;
+  color: #6b7280;
+}
+
+.count-badge {
+  padding: 10px 18px;
+  border-radius: 20px;
+  background: #f3f4f6;
+  font-weight: 600;
+}
+
+.message {
+  text-align: center;
+  padding: 40px;
+}
+
+.empty-card {
+  text-align: center;
+  padding: 50px 30px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: white;
+}
+
+.empty-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #dcfce7;
+  color: #16a34a;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.empty-card h3 {
+  margin: 0 0 8px;
+}
+
+.empty-card p {
+  color: #6b7280;
+}
+
+.error {
+  padding: 20px;
+  border-radius: 10px;
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.certification-card {
+  padding: 24px;
+  margin-bottom: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: white;
+}
+
+.cert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cert-header h3 {
+  margin: 0;
+}
+
+.cert-header p {
+  margin: 5px 0 0;
+  color: #6b7280;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.cert-details {
+  display: flex;
+  gap: 80px;
+  margin-top: 20px;
+}
+
+.cert-details span {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 5px;
+}

@@ -26,6 +26,8 @@ public class Certification {
     @Column(nullable = false)
     private String organization;
 
+    private String credentialId;
+
     @Column(nullable = false)
     private LocalDate issueDate;
 

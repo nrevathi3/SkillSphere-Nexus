@@ -1,0 +1,81 @@
+<div class="container">
+
+  <div class="page-header">
+    <div>
+      <h2>Certifications Expiring Within 30 Days</h2>
+      <p>Track certifications that require renewal soon.</p>
+    </div>
+
+    <div class="count-badge">
+      {{ certifications.length }}
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="message">
+    Loading certifications...
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="!loading && error" class="error">
+    {{ error }}
+  </div>
+
+  <!-- Empty -->
+  <div
+    *ngIf="!loading && !error && certifications.length === 0"
+    class="empty-card"
+  >
+    <div class="empty-icon">✓</div>
+
+    <h3>No Certifications Expiring Soon</h3>
+
+    <p>
+      You currently have no certifications expiring
+      within the next 30 days.
+    </p>
+  </div>
+
+  <!-- Expiring Certifications -->
+  <div
+    *ngIf="!loading && !error && certifications.length > 0"
+    class="certification-list"
+  >
+
+    <div
+      *ngFor="let cert of certifications"
+      class="certification-card"
+    >
+
+      <div class="cert-header">
+
+        <div>
+          <h3>{{ cert.name }}</h3>
+          <p>{{ cert.issuingOrganization }}</p>
+        </div>
+
+        <span class="status">
+          {{ cert.status }}
+        </span>
+
+      </div>
+
+      <div class="cert-details">
+
+        <div>
+          <span>Employee</span>
+          <strong>{{ cert.employeeName }}</strong>
+        </div>
+
+        <div>
+          <span>Expiry Date</span>
+          <strong>{{ cert.expiry }}</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

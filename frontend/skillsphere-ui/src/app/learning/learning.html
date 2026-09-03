@@ -1,0 +1,273 @@
+<div class="learning-container">
+
+  <!-- =========================
+       HERO SECTION
+  ========================== -->
+
+  <section class="learning-hero">
+
+    <div class="hero-content">
+
+      <div class="hero-text">
+
+        <h1>
+          Available Courses
+        </h1>
+
+        <p>
+          Explore courses and improve your professional skills
+        </p>
+
+        <div class="hero-line"></div>
+
+        <!-- LEARNING PATH BUTTON -->
+
+        <a
+          class="learning-path-button"
+          routerLink="/learning-path">
+
+          <span>
+            🎯
+          </span>
+
+          <span>
+            Explore Learning Paths
+          </span>
+
+          <span>
+            →
+          </span>
+
+        </a>
+
+      </div>
+
+
+      <div class="hero-illustration">
+        <img
+          src="images/learning-hat.png"
+          alt="Learning and Education">
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       COURSES SECTION
+  ========================== -->
+
+  <section class="courses-section">
+
+    <div class="section-heading">
+
+      <h2>
+        Learning Courses
+      </h2>
+
+      <p>
+        Choose a course to start learning
+      </p>
+
+    </div>
+
+
+    <!-- =========================
+         COURSES LIST
+    ========================== -->
+
+    <div class="courses-list">
+
+      @for (course of courses; track course.courseId) {
+
+      <!-- =========================
+           SINGLE COURSE CARD
+      ========================== -->
+
+      <div class="course-card">
+
+        <!-- COURSE IMAGE -->
+
+        <div class="course-image">
+
+          <img
+            src="images/java-course.png"
+            alt="Java Programming">
+
+        </div>
+
+
+        <!-- COURSE DETAILS -->
+
+        <div class="course-content">
+
+          <!-- TITLE + STATUS -->
+
+          <div class="course-title-row">
+
+            <div>
+
+              <h2>
+                {{ course.title }}
+              </h2>
+
+              <span class="course-status">
+
+                  <span class="status-dot"></span>
+
+                  {{ course.type }}
+
+                </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- DESCRIPTION -->
+
+          <p class="course-description">
+            {{ course.description }}
+          </p>
+
+
+          <!-- DIVIDER -->
+
+          <div class="course-divider"></div>
+
+
+          <!-- COURSE INFORMATION -->
+
+          <div class="course-info">
+
+            <!-- DURATION -->
+
+            <div class="info-item">
+
+              <div class="info-icon">
+                ⏱
+              </div>
+
+              <div>
+
+                  <span>
+                    Duration
+                  </span>
+
+                <strong>
+                  {{ course.duration }} hours
+                </strong>
+
+              </div>
+
+            </div>
+
+
+            <!-- INSTRUCTOR -->
+
+            <div class="info-item">
+
+              <div class="info-icon">
+                👤
+              </div>
+
+              <div>
+
+                  <span>
+                    Instructor
+                  </span>
+
+                <strong>
+                  {{ course.instructor }}
+                </strong>
+
+              </div>
+
+            </div>
+
+
+            <!-- RATING -->
+
+            <div class="info-item">
+
+              <div class="info-icon">
+                ⭐
+              </div>
+
+              <div>
+
+                  <span>
+                    Rating
+                  </span>
+
+                <strong>
+                  {{ course.rating }}
+                </strong>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- VIEW COURSE -->
+
+          <a
+            class="view-course-button"
+            [routerLink]="[
+                '/learning/course',
+                course.courseId
+              ]">
+
+              <span class="book-icon">
+                📖
+              </span>
+
+            <span>
+                View Course
+              </span>
+
+            <span class="arrow">
+                →
+              </span>
+
+          </a>
+
+        </div>
+
+      </div>
+
+      }
+
+    </div>
+
+
+    <!-- =========================
+         NO COURSES
+    ========================== -->
+
+    @if (courses.length === 0) {
+
+    <div class="no-courses">
+
+      <div class="empty-icon">
+        📚
+      </div>
+
+      <h3>
+        No Courses Available
+      </h3>
+
+      <p>
+        There are currently no courses available.
+      </p>
+
+    </div>
+
+    }
+
+  </section>
+
+</div>

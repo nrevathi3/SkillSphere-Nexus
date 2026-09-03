@@ -1,0 +1,409 @@
+<div class="certification-page">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <h1>My Certifications</h1>
+      <p>Track and manage your professional certifications</p>
+    </div>
+
+    <div class="total-badge">
+      <span>{{ certifications.length }}</span>
+      <small>Total</small>
+    </div>
+  </div>
+
+
+  <!-- Certification Cards -->
+  <div
+    *ngFor="let certification of certifications"
+    class="certification-card"
+  >
+
+    <!-- Certification Header -->
+    <div class="cert-header">
+
+      <div class="certificate-icon">
+        🏆
+      </div>
+
+      <div class="certificate-title">
+        <h2>{{ certification.certificationName }}</h2>
+        <p>{{ certification.organization }}</p>
+      </div>
+
+      <span class="status-badge valid">
+        ● {{ certification.status }}
+      </span>
+
+    </div>
+
+
+    <!-- Certification Details -->
+    <div class="cert-details">
+
+      <div class="detail-item">
+        <span class="detail-label">Issue Date</span>
+        <strong>{{ certification.issueDate }}</strong>
+      </div>
+
+      <div class="detail-item">
+        <span class="detail-label">Expiry Date</span>
+        <strong>{{ certification.expiryDate }}</strong>
+      </div>
+
+      <div class="detail-item">
+        <span class="detail-label">Credential ID</span>
+        <strong>
+          {{ certification.credentialId || '—' }}
+        </strong>
+      </div>
+
+    </div>
+
+
+    <!-- Renewal Information -->
+    <div
+      *ngIf="renewal"
+      class="renewal-section"
+    >
+
+      <div class="section-title">
+        <span class="section-icon">🔄</span>
+
+        <div>
+          <h3>Renewal Information</h3>
+          <p>Certification renewal details</p>
+        </div>
+      </div>
+
+
+      <div class="renewal-content">
+
+        <div class="renewal-status">
+
+          <span class="detail-label">
+            Renewal Status
+          </span>
+
+          <span
+            *ngIf="renewal.status === 'APPROVED'"
+            class="status-badge approved"
+          >
+            ✓ APPROVED
+          </span>
+
+          <span
+            *ngIf="renewal.status === 'REQUESTED'"
+            class="status-badge requested"
+          >
+            ⏳ REQUESTED
+          </span>
+
+        </div>
+
+
+        <div class="renewal-detail">
+          <span class="detail-label">
+            Requested By
+          </span>
+
+          <strong>
+            {{ renewal.requestedBy }}
+          </strong>
+        </div>
+
+
+        <div
+          *ngIf="renewal.newExpiry"
+          class="renewal-detail"
+        >
+          <span class="detail-label">
+            New Expiry
+          </span>
+
+          <strong>
+            {{ renewal.newExpiry }}
+          </strong>
+        </div>
+
+
+        <div
+          *ngIf="renewal.approvedBy"
+          class="renewal-detail"
+        >
+          <span class="detail-label">
+            Approved By
+          </span>
+
+          <strong>
+            {{ renewal.approvedBy }}
+          </strong>
+        </div>
+
+      </div>
+
+
+      <!-- Renewal Button -->
+      <div class="renewal-action">
+
+        <button
+          *ngIf="renewal.status === 'APPROVED'"
+          type="button"
+          class="renewal-button approved-button"
+          disabled
+        >
+          ✓ Renewal Approved
+        </button>
+
+        <button
+          *ngIf="renewal.status === 'REQUESTED'"
+          type="button"
+          class="renewal-button requested-button"
+          disabled
+        >
+          ⏳ Renewal Requested
+        </button>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- No Certifications -->
+  <div
+    *ngIf="certifications.length === 0"
+    class="empty-state"
+  >
+
+    <div class="empty-icon">
+      🎓
+    </div>
+
+    <h2>No Certifications</h2>
+
+    <p>
+      No certifications are currently available.
+    </p>
+
+  </div>
+
+
+  <!-- Bottom Grid -->
+  <div class="dashboard-grid">
+
+
+    <!-- Compliance -->
+    <div
+      *ngIf="compliance"
+      class="dashboard-card compliance-card"
+    >
+
+      <div class="card-header">
+
+        <div class="card-icon">
+          🛡️
+        </div>
+
+        <div>
+          <h2>Compliance</h2>
+          <p>Certification compliance overview</p>
+        </div>
+
+      </div>
+
+
+      <div
+        class="compliance-status"
+        [class.not-compliant]="!compliance.compliant"
+      >
+
+        <span class="compliance-icon">
+          {{ compliance.compliant ? '✓' : '!' }}
+        </span>
+
+        <div>
+          <strong>
+            {{
+            compliance.compliant
+            ? 'COMPLIANT'
+            : 'NOT COMPLIANT'
+            }}
+          </strong>
+
+          <span>
+            {{
+              compliance.compliant
+                ? 'All certifications are valid'
+                : 'Attention required'
+            }}
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="stats-grid">
+
+        <div class="stat">
+          <strong>
+            {{ compliance.totalCertifications }}
+          </strong>
+          <span>Total</span>
+        </div>
+
+        <div class="stat">
+          <strong>
+            {{ compliance.validCertifications }}
+          </strong>
+          <span>Valid</span>
+        </div>
+
+        <div class="stat">
+          <strong>
+            {{ compliance.expiredCertifications }}
+          </strong>
+          <span>Expired</span>
+        </div>
+
+        <div class="stat">
+          <strong>
+            {{ compliance.expiringSoon }}
+          </strong>
+          <span>Expiring Soon</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Certification Report -->
+    <div
+      *ngIf="report"
+      class="dashboard-card report-card"
+    >
+
+      <div class="card-header">
+
+        <div class="card-icon">
+          📊
+        </div>
+
+        <div>
+          <h2>Certification Report</h2>
+          <p>Certification statistics</p>
+        </div>
+
+      </div>
+
+
+      <div class="report-list">
+
+        <div class="report-row">
+          <span>Total Certifications</span>
+          <strong>{{ report.totalCertifications }}</strong>
+        </div>
+
+        <div class="report-row">
+          <span>Valid Certifications</span>
+          <strong>{{ report.validCertifications }}</strong>
+        </div>
+
+        <div class="report-row">
+          <span>Expired Certifications</span>
+          <strong>{{ report.expiredCertifications }}</strong>
+        </div>
+
+        <div class="report-row">
+          <span>Expiring Soon</span>
+          <strong>{{ report.expiringSoon }}</strong>
+        </div>
+
+      </div>
+
+
+      <div class="renewal-rate">
+
+        <div>
+          <span>Renewal Rate</span>
+          <strong>{{ report.renewalRate }}%</strong>
+        </div>
+
+        <div class="progress-bar">
+          <div
+            class="progress-fill"
+            [style.width.%]="report.renewalRate"
+          ></div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Audit History -->
+  <div
+    *ngIf="audits.length > 0"
+    class="audit-card"
+  >
+
+    <div class="card-header">
+
+      <div class="card-icon">
+        🕘
+      </div>
+
+      <div>
+        <h2>Audit History</h2>
+        <p>Recent certification activity</p>
+      </div>
+
+    </div>
+
+
+    <div class="audit-list">
+
+      <div
+        *ngFor="let audit of audits"
+        class="audit-item"
+      >
+
+        <div class="audit-dot"></div>
+
+        <div class="audit-content">
+
+          <div class="audit-top">
+
+            <strong>
+              {{ audit.action }}
+            </strong>
+
+            <span>
+              {{ audit.performedAt }}
+            </span>
+
+          </div>
+
+          <p>
+            {{ audit.details }}
+          </p>
+
+          <small>
+            Performed by <strong>{{ audit.performedBy }}</strong>
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

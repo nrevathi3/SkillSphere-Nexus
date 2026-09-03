@@ -1,0 +1,964 @@
+<div class="course-details-container">
+
+  @if (course) {
+
+  <!-- =====================================================
+       COURSE HERO
+  ====================================================== -->
+
+  <section class="course-hero">
+
+    <div class="course-hero-content">
+
+      <div class="course-hero-icon">
+
+        <img
+          src="images/java-course.png"
+          alt="Java Programming">
+
+      </div>
+
+      <div class="course-hero-text">
+
+        <span class="course-label">
+          {{ course.type }}
+        </span>
+
+        <h1>
+          {{ course.title }}
+        </h1>
+
+        <p>
+          {{ course.description }}
+        </p>
+
+        <div class="hero-rating">
+
+          <span>
+            ⭐ {{ course.rating }}
+          </span>
+
+          <span>•</span>
+
+          <span>
+            {{ course.duration }} hours
+          </span>
+
+          <span>•</span>
+
+          <span>
+            {{ course.instructor }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       COURSE INFORMATION
+  ====================================================== -->
+
+  <section class="course-info-card">
+
+    <div class="course-info-item">
+
+      <div class="info-icon">
+        ⏱
+      </div>
+
+      <div>
+        <span>Duration</span>
+
+        <strong>
+          {{ course.duration }} Hours
+        </strong>
+      </div>
+
+    </div>
+
+
+    <div class="course-info-item">
+
+      <div class="info-icon">
+        👨‍🏫
+      </div>
+
+      <div>
+        <span>Instructor</span>
+
+        <strong>
+          {{ course.instructor }}
+        </strong>
+      </div>
+
+    </div>
+
+
+    <div class="course-info-item">
+
+      <div class="info-icon">
+        ⭐
+      </div>
+
+      <div>
+        <span>Rating</span>
+
+        <strong>
+          {{ course.rating }}
+        </strong>
+      </div>
+
+    </div>
+
+
+    <div class="course-info-item">
+
+      <div class="info-icon">
+        🌐
+      </div>
+
+      <div>
+        <span>Type</span>
+
+        <strong>
+          {{ course.type }}
+        </strong>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       ENROLLMENT
+  ====================================================== -->
+
+  <section class="enrollment-card">
+
+    @if (!enrollment) {
+
+    <div class="enrollment-empty">
+
+      <div>
+
+        <h2>
+          Ready to start learning?
+        </h2>
+
+        <p>
+          Enroll in this course to begin your learning journey.
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="enroll-button"
+        (click)="enrollCourse()"
+        [disabled]="enrolling">
+
+        {{ enrolling ? 'Enrolling...' : 'Enroll Now →' }}
+
+      </button>
+
+    </div>
+
+    } @else {
+
+    <div class="enrollment-active">
+
+      <div class="enrollment-icon">
+        ✓
+      </div>
+
+      <div>
+
+        <span class="enrolled-label">
+          You're Enrolled!
+        </span>
+
+        <p>
+          You are enrolled in {{ course.title }}.
+        </p>
+
+      </div>
+
+    </div>
+
+    }
+
+  </section>
+
+
+  <!-- =====================================================
+       LEARNING PROGRESS
+  ====================================================== -->
+
+  @if (enrollment) {
+
+  <section class="details-section">
+
+    <div class="section-heading">
+
+      <div class="section-heading-icon">
+        📊
+      </div>
+
+      <div>
+
+        <h2>
+          Learning Progress
+        </h2>
+
+        <p>
+          Track your progress through this course
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="progress-card">
+
+      <div class="progress-top">
+
+        <div>
+
+          <span>
+            Course Progress
+          </span>
+
+          <strong>
+            {{ enrollment.progress }}%
+          </strong>
+
+        </div>
+
+
+        @if (enrollment.completed && assessmentPassed) {
+
+        <span class="completed-badge">
+          ✓ Completed
+        </span>
+
+        } @else {
+
+        <span class="progress-badge">
+          In Progress
+        </span>
+
+        }
+
+      </div>
+
+
+      <div class="progress-track">
+
+        <div
+          class="progress-fill"
+          [style.width.%]="enrollment.progress">
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  }
+
+
+  <!-- =====================================================
+       COURSE CONTENT
+  ====================================================== -->
+
+  <section class="details-section">
+
+    <div class="section-heading">
+
+      <div class="section-heading-icon">
+        📚
+      </div>
+
+      <div>
+
+        <h2>
+          Course Content
+        </h2>
+
+        <p>
+          Complete the lessons to progress through the course
+        </p>
+
+      </div>
+
+    </div>
+
+
+    @if (contents.length > 0) {
+
+    <div class="content-list">
+
+      @for (
+      content of contents;
+      track content.contentId
+      ) {
+
+      <div class="lesson-card">
+
+
+        <!-- LESSON ICON -->
+
+        <div class="lesson-icon">
+
+          @if (content.type === 'VIDEO') {
+
+          🎥
+
+          } @else if (content.type === 'PDF') {
+
+          📄
+
+          } @else if (content.type === 'DOCUMENT') {
+
+          📝
+
+          } @else if (content.type === 'QUIZ') {
+
+          ❓
+
+          } @else {
+
+          📖
+
+          }
+
+        </div>
+
+
+        <!-- LESSON INFORMATION -->
+
+        <div class="lesson-info">
+
+          <h3>
+            {{ content.title }}
+          </h3>
+
+          <div class="lesson-meta">
+
+            <span>
+              {{ content.type }}
+            </span>
+
+            <span>
+              ⏱ {{ content.duration }} minutes
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- LESSON ACTIONS -->
+
+        <div class="lesson-actions">
+
+          <a
+            class="open-button"
+            [href]="content.contentUrl"
+            target="_blank">
+
+            Open
+
+          </a>
+
+
+          @if (
+          !completedContents.includes(content.contentId)
+          ) {
+
+          <button
+            type="button"
+            class="lesson-complete-button"
+            (click)="markContentComplete(content.contentId)"
+            [disabled]="updatingProgress">
+
+            {{
+            updatingProgress
+            ? 'Updating...'
+            : '✓ Mark Complete'
+            }}
+
+          </button>
+
+          } @else {
+
+          <span class="lesson-completed">
+            ✓ Completed
+          </span>
+
+          }
+
+        </div>
+
+      </div>
+
+      }
+
+    </div>
+
+    } @else {
+
+    <div class="empty-card">
+
+      <span>
+        📚
+      </span>
+
+      <p>
+        No course content available.
+      </p>
+
+    </div>
+
+    }
+
+  </section>
+
+
+  <!-- =====================================================
+       ASSESSMENT
+  ====================================================== -->
+
+  @if (enrollment) {
+
+  <section class="details-section">
+
+    <div class="section-heading">
+
+      <div class="section-heading-icon">
+        📝
+      </div>
+
+      <div>
+
+        <h2>
+          Assessment
+        </h2>
+
+        <p>
+          Check your understanding of the course
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =================================================
+         ASSESSMENT CARD
+    ================================================== -->
+
+    <div class="assessment-card">
+
+
+      <!-- =================================================
+           NO SCORE / TRY AGAIN
+      ================================================== -->
+
+      @if (
+      enrollment.score === null ||
+      enrollment.score === undefined ||
+      assessmentRetrying
+      ) {
+
+      <div class="assessment-form">
+
+        <div class="assessment-icon">
+          📝
+        </div>
+
+
+        <div class="assessment-form-content">
+
+          @if (assessmentRetrying) {
+
+          <h3>
+            Try the Assessment Again
+          </h3>
+
+          <p>
+            Review the course material and enter your new score.
+          </p>
+
+          } @else {
+
+          <h3>
+            Course Assessment
+          </h3>
+
+          <p>
+            Enter your assessment score to continue.
+          </p>
+
+          }
+
+
+          <div class="assessment-input">
+
+            <label for="assessmentScore">
+              Assessment Score
+            </label>
+
+
+            <div class="assessment-input-row">
+
+              <input
+                id="assessmentScore"
+                type="number"
+                min="0"
+                max="100"
+                placeholder="Enter score"
+                [(ngModel)]="assessmentScore">
+
+
+              <span>
+                %
+              </span>
+
+
+              <button
+                type="button"
+                class="submit-button"
+                (click)="submitAssessment()"
+                [disabled]="submittingAssessment">
+
+                {{
+                submittingAssessment
+                ? 'Submitting...'
+                : 'Submit Score'
+                }}
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      }
+
+
+      <!-- =================================================
+           ASSESSMENT FAILED
+      ================================================== -->
+
+      @else if (assessmentFailed) {
+
+      <div class="assessment-failed">
+
+        <div class="failed-icon">
+          😔
+        </div>
+
+
+        <div class="failed-content">
+
+          <h3>
+            Assessment Not Passed
+          </h3>
+
+
+          <p class="failed-score-text">
+
+            Your Score:
+
+            <strong>
+              {{ enrollment.score }}%
+            </strong>
+
+          </p>
+
+
+          <p class="encouragement-text">
+            Review the course material and try the assessment again.
+          </p>
+
+
+          <div class="learning-tip">
+
+            <span>
+              💡
+            </span>
+
+            <div>
+
+              <strong>
+                Keep Learning
+              </strong>
+
+              <p>
+                Strengthen your understanding of the key concepts
+                before your next attempt.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="try-again-button"
+            (click)="tryAssessmentAgain()">
+
+            🔄 Try Again
+
+          </button>
+
+        </div>
+
+      </div>
+
+      }
+
+
+      <!-- =================================================
+           ASSESSMENT PASSED
+      ================================================== -->
+
+      @else if (assessmentPassed) {
+
+      <div class="assessment-passed">
+
+        <div class="passed-icon">
+          🎉
+        </div>
+
+
+        <div class="passed-content">
+
+          <h3>
+            Assessment Passed!
+          </h3>
+
+
+          <p class="passed-score">
+
+            Your Score:
+
+            <strong>
+              {{ enrollment.score }}%
+            </strong>
+
+          </p>
+
+
+          <p>
+            Excellent work! You have passed the assessment.
+          </p>
+
+
+          <div class="success-tip">
+
+            🌟 You can now complete the course and
+            receive your certificate.
+
+          </div>
+
+        </div>
+
+      </div>
+
+      }
+
+    </div>
+
+  </section>
+
+  }
+
+
+  <!-- =====================================================
+       READY TO COMPLETE
+       ONLY WHEN:
+       1. CONTENT = 100%
+       2. ASSESSMENT PASSED
+       3. COURSE NOT COMPLETED
+  ====================================================== -->
+
+  @if (
+  enrollment &&
+  enrollment.progress >= 100 &&
+  assessmentPassed &&
+  !enrollment.completed
+  ) {
+
+  <section class="details-section">
+
+    <div class="section-heading">
+
+      <div class="section-heading-icon">
+        🏆
+      </div>
+
+      <div>
+
+        <h2>
+          Course Completion
+        </h2>
+
+        <p>
+          Your course is ready to be completed
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="completion-card ready">
+
+      <div class="completion-icon">
+        🎯
+      </div>
+
+
+      <div class="completion-content">
+
+        <h3>
+          Ready to Complete
+        </h3>
+
+
+        <p>
+          You have completed all lessons and passed the assessment.
+        </p>
+
+
+        <button
+          type="button"
+          class="complete-course-button"
+          (click)="completeCourse()">
+
+          ✓ Complete Course
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  }
+
+
+  <!-- =====================================================
+       COURSE COMPLETED
+       ONLY AFTER COMPLETE COURSE IS CLICKED
+  ====================================================== -->
+
+  @if (
+  enrollment &&
+  enrollment.completed &&
+  assessmentPassed
+  ) {
+
+  <section class="details-section">
+
+    <div class="section-heading">
+
+      <div class="section-heading-icon">
+        🎉
+      </div>
+
+      <div>
+
+        <h2>
+          Course Completed
+        </h2>
+
+        <p>
+          You have successfully finished this course
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="completion-card completed">
+
+      <div class="completion-icon">
+        🎉
+      </div>
+
+
+      <div class="completion-content">
+
+        <h3>
+          Congratulations!
+        </h3>
+
+
+        <p>
+          You have successfully completed
+          {{ course.title }}.
+        </p>
+
+
+        @if (!certificate) {
+
+        <button
+          type="button"
+          class="certificate-button"
+          (click)="generateCertificate()">
+
+          🏆 Generate Certificate
+
+        </button>
+
+        }
+
+      </div>
+
+    </div>
+
+  </section>
+
+  }
+
+
+  <!-- =====================================================
+       CERTIFICATE
+  ====================================================== -->
+
+  @if (
+  certificate &&
+  enrollment?.completed &&
+  assessmentPassed
+  ) {
+
+  <section class="details-section">
+
+    <div class="section-heading">
+
+      <div class="section-heading-icon">
+        🏅
+      </div>
+
+      <div>
+
+        <h2>
+          Certificate
+        </h2>
+
+        <p>
+          Your course completion certificate
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="certificate-card">
+
+      <div class="certificate-icon">
+        🏆
+      </div>
+
+
+      <div class="certificate-content">
+
+        <span class="certificate-label">
+          CERTIFICATE OF COMPLETION
+        </span>
+
+
+        <h2>
+          {{ certificate.courseName }}
+        </h2>
+
+
+        <div class="certificate-details">
+
+          <p>
+
+            <span>
+              Certificate Number
+            </span>
+
+            <strong>
+              {{ certificate.certificateNumber }}
+            </strong>
+
+          </p>
+
+
+          <p>
+
+            <span>
+              Score
+            </span>
+
+            <strong>
+              {{ certificate.score }}%
+            </strong>
+
+          </p>
+
+
+          <p>
+
+            <span>
+              Issued Date
+            </span>
+
+            <strong>
+              {{ certificate.issuedDate }}
+            </strong>
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  }
+
+
+  } @else {
+
+  <!-- =====================================================
+       LOADING
+  ====================================================== -->
+
+  <div class="loading-card">
+
+    <div class="loading-spinner"></div>
+
+    <p>
+      Loading course details...
+    </p>
+
+  </div>
+
+  }
+
+</div>
