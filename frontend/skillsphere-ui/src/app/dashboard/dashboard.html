@@ -1,0 +1,632 @@
+<div class="app-shell">
+
+  <!-- ================= SIDEBAR ================= -->
+
+  <aside class="sidebar">
+
+    <div class="brand">
+
+      <div class="brand-mark">
+        SN
+      </div>
+
+      <div>
+        <div class="brand-name">SkillSphere Nexus</div>
+        <div class="brand-tagline">Learn · Grow · Lead</div>
+      </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+      <a routerLink="/dashboard"
+         routerLinkActive="active"
+         class="nav-item">
+
+        <span class="nav-icon">DB</span>
+        <span>Dashboard</span>
+
+      </a>
+
+
+      <a routerLink="/learning"
+         routerLinkActive="active"
+         class="nav-item">
+
+        <span class="nav-icon">LE</span>
+        <span>Learning</span>
+
+      </a>
+
+
+      <a routerLink="/certification"
+         routerLinkActive="active"
+         class="nav-item">
+
+        <span class="nav-icon">CR</span>
+        <span>Certifications</span>
+
+      </a>
+
+
+      <a routerLink="/career"
+         routerLinkActive="active"
+         class="nav-item">
+
+        <span class="nav-icon">CA</span>
+        <span>Career</span>
+
+      </a>
+
+
+      <a routerLink="/employee-profile"
+         routerLinkActive="active"
+         class="nav-item">
+
+        <span class="nav-icon">SK</span>
+        <span>My Skills</span>
+
+      </a>
+
+
+      <a routerLink="/jobs"
+         routerLinkActive="active"
+         class="nav-item">
+
+        <span class="nav-icon">JB</span>
+        <span>Internal Jobs</span>
+
+      </a>
+
+
+      <a routerLink="/analytics"
+         routerLinkActive="active"
+         class="nav-item">
+
+        <span class="nav-icon">AN</span>
+        <span>Analytics</span>
+
+      </a>
+
+    </nav>
+
+
+    <div class="sidebar-footer">
+
+      <div class="footer-line"></div>
+
+      <div class="footer-message">
+        <strong>Continuous learning</strong>
+        <span>Build stronger skills and advance your career.</span>
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- ================= MAIN ================= -->
+
+  <main class="main-content">
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="dashboard-header">
+
+      <div>
+
+        <div class="eyebrow">
+          SKILLSPHERE NEXUS
+        </div>
+
+        <h1>Dashboard</h1>
+
+        <p>
+          Monitor your skills, learning, certifications and career development.
+        </p>
+
+      </div>
+
+
+      <div class="portal-status">
+
+        <span class="status-dot"></span>
+
+        <div>
+          <strong>Employee Portal</strong>
+          <span>Active</span>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- ================= KPI CARDS ================= -->
+
+    <section class="stats-grid">
+
+
+      <!-- Skills -->
+
+      <div class="stat-card">
+
+        <div class="stat-icon skills-icon">
+          SK
+        </div>
+
+        <div class="stat-content">
+
+          <span class="stat-label">
+            Skills
+          </span>
+
+          <strong class="stat-value">
+            {{ totalSkills }}
+          </strong>
+
+          <div class="stat-meta">
+            <span>Skill coverage</span>
+            <strong>{{ skillCoverage }}%</strong>
+          </div>
+
+          <div class="mini-progress">
+            <div [style.width.%]="skillCoverage"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Learning -->
+
+      <div class="stat-card">
+
+        <div class="stat-icon learning-icon">
+          LE
+        </div>
+
+        <div class="stat-content">
+
+          <span class="stat-label">
+            Learning
+          </span>
+
+          <strong class="stat-value">
+            {{ totalCourses }}
+          </strong>
+
+          <div class="stat-meta">
+            <span>Active enrollments</span>
+            <strong>{{ activeEnrollments }}</strong>
+          </div>
+
+          <div class="mini-progress">
+            <div [style.width.%]="completionRate"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Certifications -->
+
+      <div class="stat-card">
+
+        <div class="stat-icon certification-icon">
+          CR
+        </div>
+
+        <div class="stat-content">
+
+          <span class="stat-label">
+            Certifications
+          </span>
+
+          <strong class="stat-value">
+            {{ totalCertifications }}
+          </strong>
+
+          <div class="stat-meta">
+            <span>Active credentials</span>
+            <strong>{{ activeCertifications }}</strong>
+          </div>
+
+          <div class="mini-progress">
+            <div [style.width.%]="100"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Career -->
+
+      <div class="stat-card">
+
+        <div class="stat-icon career-icon">
+          CA
+        </div>
+
+        <div class="stat-content">
+
+          <span class="stat-label">
+            Career Progress
+          </span>
+
+          <strong class="stat-value">
+            {{ averageProgress }}%
+          </strong>
+
+          <div class="stat-meta">
+            <span>Promotion eligible</span>
+            <strong>{{ promotionEligible }}</strong>
+          </div>
+
+          <div class="mini-progress">
+            <div [style.width.%]="averageProgress"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= ROW 1 ================= -->
+
+    <section class="content-grid">
+
+
+      <!-- CAREER DEVELOPMENT -->
+
+      <article class="dashboard-card career-card">
+
+        <div class="card-header">
+
+          <div>
+            <h2>Career Development</h2>
+            <p>Progress towards your professional goals</p>
+          </div>
+
+          <a routerLink="/career">
+            View Career
+          </a>
+
+        </div>
+
+
+        <div class="career-layout">
+
+
+          <div class="career-ring">
+
+            <div class="ring-inner">
+
+              <strong>
+                {{ averageProgress }}%
+              </strong>
+
+              <span>
+                Progress
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="career-details">
+
+
+            <div class="detail-row">
+
+              <div class="detail-icon career-detail">
+                CP
+              </div>
+
+              <span>
+                Current career plan
+              </span>
+
+              <strong>
+                {{ careerPlans }} Active Plan
+              </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+              <div class="detail-icon promotion-detail">
+                PR
+              </div>
+
+              <span>
+                Promotion eligibility
+              </span>
+
+              <strong class="success">
+                {{ promotionEligible }} Eligible
+              </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+              <div class="detail-icon jobs-detail">
+                JB
+              </div>
+
+              <span>
+                Internal opportunities
+              </span>
+
+              <strong>
+                {{ availableJobs }} Available Job
+              </strong>
+
+            </div>
+
+
+            <div class="detail-row">
+
+              <div class="detail-icon application-detail">
+                AP
+              </div>
+
+              <span>
+                Applications
+              </span>
+
+              <strong>
+                {{ applications }} Submitted
+              </strong>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- CERTIFICATIONS -->
+
+      <article class="dashboard-card">
+
+        <div class="card-header">
+
+          <div>
+            <h2>Certification Status</h2>
+            <p>Overview of your professional credentials</p>
+          </div>
+
+          <a routerLink="/certification">
+            Manage
+          </a>
+
+        </div>
+
+
+        <div class="cert-total">
+
+          <div>
+            <strong>
+              {{ totalCertifications }}
+            </strong>
+
+            <span>
+              Total certifications
+            </span>
+          </div>
+
+          <span class="valid-badge">
+            VALID
+          </span>
+
+        </div>
+
+
+        <div class="cert-grid">
+
+          <div class="cert-box">
+            <strong>{{ totalCertifications }}</strong>
+            <span>Total</span>
+          </div>
+
+
+          <div class="cert-box active">
+            <strong>{{ activeCertifications }}</strong>
+            <span>Active</span>
+          </div>
+
+
+          <div class="cert-box warning">
+            <strong>{{ expiringCertifications }}</strong>
+            <span>Expiring</span>
+          </div>
+
+
+          <div class="cert-box danger">
+            <strong>0</strong>
+            <span>Expired</span>
+          </div>
+
+        </div>
+
+
+        <div class="cert-status">
+
+          <div class="check-mark">
+            OK
+          </div>
+
+          <div>
+            <strong>
+              All credentials are valid
+            </strong>
+
+            <span>
+              No renewal action required.
+            </span>
+          </div>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- ================= ROW 2 ================= -->
+
+    <section class="content-grid">
+
+
+      <!-- LEARNING -->
+
+      <article class="dashboard-card">
+
+        <div class="card-header">
+
+          <div>
+            <h2>Learning Activity</h2>
+            <p>Your current learning progress</p>
+          </div>
+
+          <a routerLink="/learning">
+            View All
+          </a>
+
+        </div>
+
+
+        <div class="learning-layout">
+
+
+          <div class="learning-ring">
+
+            <div class="learning-ring-inner">
+
+              <strong>
+                {{ completionRate }}%
+              </strong>
+
+              <span>
+                Completion
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="learning-details">
+
+
+            <div class="learning-row">
+              <span>Total courses</span>
+              <strong>{{ totalCourses }}</strong>
+            </div>
+
+
+            <div class="learning-row">
+              <span>Active enrollments</span>
+              <strong>{{ activeEnrollments }}</strong>
+            </div>
+
+
+            <div class="learning-row">
+              <span>Completion rate</span>
+              <strong>{{ completionRate }}%</strong>
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- SKILL PROFILE -->
+
+      <article class="dashboard-card">
+
+        <div class="card-header">
+
+          <div>
+            <h2>Skill Profile</h2>
+            <p>Current competency overview</p>
+          </div>
+
+          <a routerLink="/employee-profile">
+            View Profile
+          </a>
+
+        </div>
+
+
+        <div class="skill-layout">
+
+
+          <div class="skill-count">
+
+            <strong>
+              {{ totalSkills }}
+            </strong>
+
+            <span>
+              Verified skills
+            </span>
+
+          </div>
+
+
+          <div class="skill-coverage">
+
+            <div class="coverage-header">
+
+              <span>
+                Skill coverage
+              </span>
+
+              <strong>
+                {{ skillCoverage }}%
+              </strong>
+
+            </div>
+
+
+            <div class="coverage-bar">
+
+              <div [style.width.%]="skillCoverage"></div>
+
+            </div>
+
+
+            <p>
+              Your current profile coverage
+            </p>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </section>
+
+  </main>
+
+</div>

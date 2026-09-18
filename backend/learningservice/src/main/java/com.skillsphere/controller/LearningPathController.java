@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/learning-paths")
+@RequestMapping("/api/learning/learning-paths")
 @RequiredArgsConstructor
 public class LearningPathController {
 

@@ -1,0 +1,110 @@
+<div class="analytics-page">
+
+  <div class="analytics-header">
+    <span class="section-label">CAREER ANALYTICS</span>
+
+    <h1>Career Overview</h1>
+
+    <p>
+      Get a quick overview of career plans, progress, promotions, and opportunities.
+    </p>
+  </div>
+
+
+  <!-- Analytics Cards -->
+  <div class="analytics-grid" *ngIf="analytics">
+
+    <div class="analytics-card">
+      <span class="card-icon">📋</span>
+      <div>
+        <span class="card-label">Total Career Plans</span>
+        <strong>{{ analytics.totalCareerPlans }}</strong>
+      </div>
+    </div>
+
+
+    <div class="analytics-card">
+      <span class="card-icon">🚀</span>
+      <div>
+        <span class="card-label">Active Plans</span>
+        <strong>{{ analytics.activeCareerPlans }}</strong>
+      </div>
+    </div>
+
+
+    <div class="analytics-card">
+      <span class="card-icon">🏆</span>
+      <div>
+        <span class="card-label">Completed Plans</span>
+        <strong>{{ analytics.completedPlans }}</strong>
+      </div>
+    </div>
+
+
+    <div class="analytics-card">
+      <span class="card-icon">⭐</span>
+      <div>
+        <span class="card-label">Promotion Eligible</span>
+        <strong>{{ analytics.promotionEligible }}</strong>
+      </div>
+    </div>
+
+
+    <div class="analytics-card">
+      <span class="card-icon">📈</span>
+      <div>
+        <span class="card-label">Average Progress</span>
+        <strong>{{ analytics.averageProgress }}%</strong>
+      </div>
+    </div>
+
+
+    <div class="analytics-card">
+      <span class="card-icon">🎯</span>
+      <div>
+        <span class="card-label">Skill Coverage</span>
+        <strong>{{ analytics.skillCoverage }}%</strong>
+      </div>
+    </div>
+
+
+    <div class="analytics-card">
+      <span class="card-icon">💼</span>
+      <div>
+        <span class="card-label">Active Jobs</span>
+        <strong>{{ analytics.activeJobs }}</strong>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Progress Overview -->
+  <div class="progress-card" *ngIf="analytics">
+
+    <div class="progress-header">
+      <div>
+        <h2>Career Progress</h2>
+        <p>Average progress across all active career plans.</p>
+      </div>
+
+      <strong>{{ analytics.averageProgress }}%</strong>
+    </div>
+
+    <div class="progress-bar">
+      <div
+        class="progress-fill"
+        [style.width.%]="analytics.averageProgress">
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Loading -->
+  <div class="empty-state" *ngIf="!analytics">
+    <h2>Loading Analytics...</h2>
+    <p>Please wait while your career analytics are loaded.</p>
+  </div>
+
+</div>

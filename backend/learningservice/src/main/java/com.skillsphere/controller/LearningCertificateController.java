@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/certificates")
+@RequestMapping("/api/learning/certificates")
 @RequiredArgsConstructor
 public class LearningCertificateController {
 

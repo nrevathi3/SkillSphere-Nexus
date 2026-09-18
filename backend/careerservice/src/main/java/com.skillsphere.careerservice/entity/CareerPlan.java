@@ -23,6 +23,7 @@ public class CareerPlan {
 
     private String employeeName;
 
+    @Column(name = "current_role_name")
     private String currentRole;
 
     private String targetRole;

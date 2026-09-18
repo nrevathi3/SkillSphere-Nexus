@@ -1,0 +1,307 @@
+<div class="jobs-page">
+
+  <div class="jobs-header">
+    <span class="section-label">INTERNAL JOB PORTAL</span>
+
+    <h1>Explore Career Opportunities</h1>
+
+    <p>
+      Discover internal positions that match your skills and career goals.
+    </p>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="jobs.length === 0" class="empty-state">
+
+    <div class="empty-icon">💼</div>
+
+    <h2>No Active Jobs</h2>
+
+    <p>
+      There are currently no active internal job opportunities.
+    </p>
+
+  </div>
+
+  <!-- Job Cards -->
+  <div class="jobs-grid">
+
+    <div class="job-card" *ngFor="let job of jobs">
+
+      <div class="job-top">
+
+        <div class="job-icon">
+          💼
+        </div>
+
+        <div class="job-title">
+
+          <h2>{{ job.title }}</h2>
+
+          <span class="active-badge">
+            ● Active
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="job-details">
+
+        <div class="detail">
+
+          <span class="detail-icon">🏢</span>
+
+          <div>
+            <small>Department</small>
+            <strong>{{ job.department }}</strong>
+          </div>
+
+        </div>
+
+        <div class="detail">
+
+          <span class="detail-icon">⏱️</span>
+
+          <div>
+            <small>Minimum Experience</small>
+            <strong>{{ job.minimumExperience }} years</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="skills-section">
+
+        <h3>Required Skills</h3>
+
+        <div class="skills">
+
+          <span
+            class="skill"
+            *ngFor="let skill of job.requiredSkills.split(',')">
+
+            {{ skill.trim() }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+      <div class="job-footer">
+
+        <span class="match-text">
+          🚀 Great opportunity for your career growth
+        </span>
+
+        <button
+          class="apply-button"
+          (click)="openApplicationForm(job)">
+
+          Apply Now →
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       APPLICATION FORM
+  ========================== -->
+
+  <div
+    class="application-overlay"
+    *ngIf="showApplicationForm">
+
+    <div class="application-modal">
+
+      <!-- Form Header -->
+      <div class="application-header">
+
+        <div>
+          <span class="form-label">JOB APPLICATION</span>
+
+          <h2>Apply for {{ selectedJob?.title }}</h2>
+
+          <p>
+            Complete the form below to submit your internal job application.
+          </p>
+        </div>
+
+        <button
+          class="close-button"
+          type="button"
+          (click)="closeApplicationForm()">
+
+          ×
+
+        </button>
+
+      </div>
+
+
+      <!-- Job Summary -->
+      <div class="job-summary">
+
+        <div>
+          <span>Department</span>
+          <strong>{{ selectedJob?.department }}</strong>
+        </div>
+
+        <div>
+          <span>Minimum Experience</span>
+          <strong>{{ selectedJob?.minimumExperience }} years</strong>
+        </div>
+
+      </div>
+
+
+      <!-- Application Form -->
+      <form>
+
+        <div class="form-grid">
+
+          <!-- Employee Name -->
+          <div class="form-group">
+
+            <label>Employee Name</label>
+
+            <input
+              type="text"
+              placeholder="Enter your name"
+              [(ngModel)]="application.employeeName"
+              name="employeeName">
+
+          </div>
+
+
+          <!-- Employee ID -->
+          <div class="form-group">
+
+            <label>Employee ID</label>
+
+            <input
+              type="text"
+              placeholder="Enter employee ID"
+              [(ngModel)]="application.employeeId"
+              name="employeeId">
+
+          </div>
+
+
+          <!-- Current Role -->
+          <div class="form-group">
+
+            <label>Current Role</label>
+
+            <input
+              type="text"
+              placeholder="Enter your current role"
+              [(ngModel)]="application.currentRole"
+              name="currentRole">
+
+          </div>
+
+
+          <!-- Experience -->
+          <div class="form-group">
+
+            <label>Years of Experience</label>
+
+            <input
+              type="number"
+              min="0"
+              placeholder="e.g. 2"
+              [(ngModel)]="application.yearsOfExperience"
+              name="yearsOfExperience">
+
+          </div>
+
+        </div>
+
+
+        <!-- Skills -->
+        <div class="form-group">
+
+          <label>Relevant Skills</label>
+
+          <input
+            type="text"
+            placeholder="e.g. Java, Spring Boot, Angular"
+            [(ngModel)]="application.relevantSkills"
+            name="relevantSkills">
+
+        </div>
+
+
+        <!-- Interest -->
+        <div class="form-group">
+
+          <label>Why are you interested in this position?</label>
+
+          <textarea
+            rows="4"
+            placeholder="Tell us briefly why you are interested in this role..."
+            [(ngModel)]="application.interestMessage"
+            name="interestMessage">
+          </textarea>
+
+        </div>
+
+
+        <!-- Resume -->
+        <div class="form-group">
+
+          <label>Resume</label>
+
+          <div class="file-input">
+
+            <input
+              type="file"
+              accept=".pdf,.doc,.docx"
+              (change)="onResumeSelected($event)">
+
+            <small>
+              Accepted formats: PDF, DOC, DOCX
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <!-- Buttons -->
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="cancel-button"
+            (click)="closeApplicationForm()">
+
+            Cancel
+
+          </button>
+
+          <button
+            type="button"
+            (click)="submitApplication()">
+
+            Submit Application
+
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

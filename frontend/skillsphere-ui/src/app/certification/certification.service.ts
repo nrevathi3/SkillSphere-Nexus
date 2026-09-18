@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class CertificationService {
 
   private baseUrl =
-    'http://localhost:8080/api/certifications';
+    'http://localhost:8090/api/certifications';
 
   constructor(private http: HttpClient) {}
 
@@ -60,7 +60,7 @@ export class CertificationService {
 
   getCompliance(employeeId: string) {
     return this.http.get(
-      `http://localhost:8080/api/compliance/employee/${employeeId}`
+      `http://localhost:8090/api/compliance/employee/${employeeId}`
     );
   }
 

@@ -22,7 +22,7 @@ import { routes } from './app.routes';
 
 const urlCondition =
   createInterceptorCondition<IncludeBearerTokenCondition>({
-    urlPattern: /^http:\/\/localhost:8080(\/.*)?$/i,
+    urlPattern: /^http:\/\/localhost:8090(\/.*)?$/i,
     bearerPrefix: 'Bearer'
   });
 

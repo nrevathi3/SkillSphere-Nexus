@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SkillProfile {
 
-  private baseUrl = 'http://localhost:8080/api/skills';
+  private baseUrl = 'http://localhost:8090/api/skills';
 
   constructor(private http: HttpClient) {}
 

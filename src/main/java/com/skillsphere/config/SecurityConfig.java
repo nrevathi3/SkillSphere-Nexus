@@ -29,7 +29,6 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/skills/catalog").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 ->
@@ -63,7 +62,10 @@ public class SecurityConfig {
                     roles.stream()
                             .filter(String.class::isInstance)
                             .map(Object::toString)
-                            .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                            .map(role -> role.startsWith("ROLE_")
+                                    ? role
+                                    : "ROLE_" + role)
+                            .map(SimpleGrantedAuthority::new)
                             .forEach(authorities::add);
                 }
             }

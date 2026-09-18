@@ -38,7 +38,7 @@ public class JobService {
     }
 
     public List<JobDTO> getActiveJobs() {
-        return jobRepository.findByActiveTrue()
+        return jobRepository.findActiveJobs()
                 .stream()
                 .map(this::toDTO)
                 .toList();

@@ -56,7 +56,7 @@ public class AnalyticsService {
                 ? 0.0
                 : (plansWithoutGaps * 100.0) / totalPlans;
 
-        long activeJobs = jobRepository.findByActiveTrue().size();
+        long activeJobs = jobRepository.findActiveJobs().size();
 
         return AnalyticsDTO.builder()
                 .totalCareerPlans(totalPlans)

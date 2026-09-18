@@ -1,0 +1,148 @@
+<div class="career-page">
+
+  <div class="career-header">
+    <span class="section-label">CAREER PLANNING</span>
+
+    <h1>Your Career Journey</h1>
+
+    <p>
+      Track your progress, build your skills, and achieve your dream career goals.
+    </p>
+  </div>
+
+  <div *ngIf="plans.length === 0" class="empty-state">
+    <h2>No Career Plans Yet</h2>
+    <p>Your career plan will appear here once it is created.</p>
+  </div>
+
+  <div class="career-card" *ngFor="let plan of plans">
+
+    <!-- Employee Header -->
+    <div class="employee-header">
+
+      <div class="employee-icon">
+        💼
+      </div>
+
+      <div class="employee-info">
+
+        <h2>{{ plan.employeeName }}</h2>
+
+        <div class="career-path">
+          <span>{{ plan.currentRole }}</span>
+          <span class="arrow">→</span>
+          <strong>{{ plan.targetRole }}</strong>
+        </div>
+
+      </div>
+
+      <div
+        class="status-badge"
+        [class.eligible-status]="plan.promotionEligible">
+
+        <span>{{ plan.promotionEligible ? '✓' : '○' }}</span>
+
+        {{ plan.promotionEligible ? 'On Track' : 'In Progress' }}
+
+      </div>
+
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-section">
+
+      <div class="progress-title">
+        <strong>Overall Progress</strong>
+        <span>{{ plan.progress }}%</span>
+      </div>
+
+      <div class="progress-bar">
+        <div
+          class="progress-fill"
+          [style.width.%]="plan.progress">
+        </div>
+      </div>
+
+      <p class="progress-message">
+        You are {{ plan.progress }}% towards your career goal. Keep going!
+      </p>
+
+    </div>
+
+    <!-- Career Information -->
+    <div class="info-grid">
+
+      <div class="info-box">
+        <div class="info-icon skill-icon">📊</div>
+
+        <div>
+          <h3>Skill Gaps</h3>
+          <p>{{ plan.skillGaps || 'No major gaps' }}</p>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <div class="info-icon mentor-icon">👥</div>
+
+        <div>
+          <h3>Mentor</h3>
+          <p>{{ plan.mentor || 'Not assigned' }}</p>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <div class="info-icon training-icon">📖</div>
+
+        <div>
+          <h3>Training</h3>
+          <p>{{ plan.trainingPlan || 'No training plan' }}</p>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <div class="info-icon promotion-icon">⭐</div>
+
+        <div>
+          <h3>Promotion Score</h3>
+          <p>{{ plan.promotionScore }}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Promotion -->
+    <div class="promotion-section">
+
+      <div class="promotion-message">
+
+        <div class="celebration-icon">🎉</div>
+
+        <div>
+          <h3>
+            {{ plan.promotionEligible ? 'Great progress!' : 'Keep going!' }}
+          </h3>
+
+          <p>
+            {{
+            plan.promotionEligible
+            ? 'You are eligible for promotion based on your current score.'
+            : 'Continue improving your skills and progress toward promotion.'
+            }}
+          </p>
+        </div>
+
+      </div>
+
+      <div
+        class="promotion-badge"
+        [class.not-eligible]="!plan.promotionEligible">
+
+        {{ plan.promotionEligible ? 'Promotion Eligible' : 'Not Yet Eligible' }}
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
